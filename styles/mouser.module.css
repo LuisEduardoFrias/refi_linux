@@ -1,0 +1,13 @@
+
+.mouser {
+ position: absolute;
+ border: 0 solid black;
+ box-sizing: border-box;
+ width: 20px;
+ height: 20px;
+ z-index: 9;
+ 
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+}

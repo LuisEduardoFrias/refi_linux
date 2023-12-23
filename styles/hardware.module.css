@@ -1,0 +1,14 @@
+ 
+.hardware {
+ background-color: silver;
+ padding: 0;
+ 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.container_desk {
+ border: 1px solid green;
+ background-color: red;
+}

@@ -1,0 +1,91 @@
+
+.window {
+ position: absolute;
+ border: 1px solid black;
+ box-sizing: border-box;
+ box-shadow: 0 0 5px 1px #273755;
+ border-radius: 3px;
+ z-index: 2;
+ 
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ 
+ & .bar {
+  background-color: #294986b3;
+  width: 100%;
+  height: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & .contro_size {
+   position: relative;
+   box-sizing: border-box;
+   height: 100%;
+   width: 38px;
+   border-radius: 0 2px 0 0;
+   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 2px;
+   
+   & .icon {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    transform: scale(.5);
+    position: absolute;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+   }
+   
+   & .icon:active {
+    background-color: #4988ff;
+   }
+  }
+ }
+ 
+ & .container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #ebebebb8;
+  filter: blur(0.5);
+  position: relative;
+ }
+}
+
+.bar span {
+ font-size: 10px;
+ margin-inline-start: 5px;
+}
+
+.contro_size > .icon:nth-child(1) {
+ top: -2px;
+ left: -2px;
+}
+
+.contro_size > .icon:nth-child(2) {
+ top: -2px;
+ left: 9px;
+}
+
+.contro_size > .icon:nth-child(3) {
+ top: -2px;
+ left: 20px;
+}
+
+.bat > span:nth-child(1) {
+ background-color: red;
+ font-size: 5px;
+}
