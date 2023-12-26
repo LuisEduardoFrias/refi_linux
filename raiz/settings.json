@@ -1,4 +1,138 @@
 {
  "show_extention": false,
- "valum": 80
+ "valum": 80,
+ "apps": [
+  {
+   "name": "AVG",
+   "img": "/icons/avg.svg",
+   "iswindow": true,
+   "file": "avg/avg.tsx"
+  },
+  {
+   "name": "libreoffice base",
+   "img": "/icons/baselibre-office.svg",
+   "iswindow": true,
+   "file": "libreoffice_base/libreoffice_base.tsx"
+  },
+  {
+   "name": "Libreoffice calc",
+   "img": "/icons/libreoffice-calc.svg",
+   "iswindow": true,
+   "file": "libreoffice_calc/libreoffice_calc.tsx"
+  },
+  {
+   "name": "Libreoffice impress",
+   "img": "/icons/libreoffice-impress.svg",
+   "iswindow": true,
+   "file": "libreoffice_impress/libreoffice_impress.tsx"
+  },
+  {
+   "name": "Libreoffice word",
+   "img": "/icons/libreoffice-word.svg",
+   "iswindow": true,
+   "file": "libreoffice_word/libreoffice_word.tsx"
+  },
+  {
+   "name": "Browser",
+   "img": "/icons/browser.png",
+   "iswindow": true,
+   "file": "browser_tor/browser_tor.tsx"
+  },
+  {
+   "name": "Calculadora",
+   "img": "/icons/calculator.png",
+   "iswindow": true,
+   "file": "calculator/calculator.tsx"
+  },
+  {
+   "name": "Calendario",
+   "img": "/icons/calendario.png",
+   "iswindow": true,
+   "file": "calender/calender.tsx"
+  },
+  {
+   "name": "Github",
+   "img": "/icons/github.svg",
+   "iswindow": true,
+   "file": "github/github.tsx"
+  },
+  {
+   "name": "Images",
+   "img": "/icons/images.png",
+   "iswindow": true,
+   "file": "image/image.tsx"
+  },
+  {
+   "name": "Password",
+   "img": "/icons/keys.png",
+   "iswindow": true,
+   "file": "password/password.tsx"
+  },
+  {
+   "name": "Postman",
+   "img": "/icons/postman.png",
+   "iswindow": true,
+   "file": "postman/postman.tsx"
+  },
+  {
+   "name": "Configurar pantalla",
+   "img": "/icons/setting-monitos.png",
+   "iswindow": true,
+   "file": "conf_screen/conf_screen.tsx"
+  },
+  {
+   "name": "Configuracion",
+   "img": "/icons/settings.svg",
+   "iswindow": true,
+   "file": "configuration/configuration.tsx"
+  },
+  {
+   "name": "Software",
+   "img": "/icons/software.png",
+   "iswindow": true,
+   "file": "software/software.tsx"
+  },
+  {
+   "name": "SolisWorks",
+   "img": "/icons/solisworks.svg",
+   "iswindow": true,
+   "file": "solidworks/solidworks.tsx"
+  },
+  {
+   "name": "Almacenamiento",
+   "img": "/icons/ssd.png",
+   "iswindow": true,
+   "file": "storage/storage.tsx"
+  },
+  {
+   "name": "Teclado",
+   "img": "/icons/teclado.png",
+   "iswindow": false,
+   "file": "keyboard/keyboard.tsx"
+  },
+  {
+   "name": "Terminal",
+   "img": "/icons/terminal.png",
+   "iswindow": true,
+   "file": "terminal/terminal.tsx"
+  },
+  {
+   "name": "vlc",
+   "img": "/icons/vlc.svg",
+   "iswindow": true,
+   "file": "vlc/vlc.tsx"
+  },
+  {
+   "name": "Vs Code",
+   "img": "/icons/vs-code.svg",
+   "iswindow": true,
+   "file": "vs_code/vs_code.tsx"
+  },
+  {
+   "name": "Gmail",
+   "img": "/icons/gmail.svg",
+   "iswindow": true,
+   "file": "gmail/gmail.tsx"
+  }
+ ]
 }

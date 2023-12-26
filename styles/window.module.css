@@ -17,11 +17,15 @@
   width: 100%;
   height: 20px;
   box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas: ". title size";
+  
   & .contro_size {
+   grid-area: size;
+   justify-self: end;
    position: relative;
    box-sizing: border-box;
    height: 100%;
@@ -56,18 +60,21 @@
  }
  
  & .container {
+  position: relative;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
+  border-radius: 0 0 3px 3px;
   background-color: #ebebebb8;
   filter: blur(0.5);
-  position: relative;
+  box-sizing: border-box;
  }
 }
 
 .bar span {
+ grid-area: title;
  font-size: 10px;
- margin-inline-start: 5px;
+ justify-self: center;
+ align-self: center;
 }
 
 .contro_size > .icon:nth-child(1) {

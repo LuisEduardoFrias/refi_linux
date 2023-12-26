@@ -9,14 +9,18 @@ export default class Bar {
  h: number;
  position: Position;
  desktop: string;
- panelVolum: boolean;
+ showMenu: boolean;
+ showPanelVolum: boolean;
+ volum: number;
  date: string;
  time: string;
  
- constructor(height: number, desktop: string) {
+ constructor(height: number, desktop: string, volum: number, position: Position) {
   this.h = height;
-  this.position = Position.top;
-  this.panelVolum = false;
+  this.position = position;
+  this.showPanelMenu = false;
+  this.showPanelVolum = false;
+  this.volum = volum;
   this.desktop = desktop;
   this.datetime();
  }
@@ -25,16 +29,20 @@ export default class Bar {
   this.desktop = index;
  }
  
+ changeVolum(value: number) {
+  this.volum = value;
+ }
+ 
  showVolum(value: boolean) {
-  this.panelVolum = value;
+  this.showPanelVolum = value;
+ }
+ 
+ showMenu(value: boolean) {
+  this.showPanelMenu = value;
  }
  
  private datetime() {
-  new Promise((resolve, reject) => {
-   setTimeout(() => {
-    this.date = new Date().toLocaleDateString("es-DO");
-    this.time = new Date().toLocaleTimeString("es-DO");
-   }, 1000);
-  });
+  this.date = new Date().toLocaleDateString("es-DO");
+  this.time = new Date().toLocaleTimeString("es-DO");
  }
 }

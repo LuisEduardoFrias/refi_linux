@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "commander": "^11.1.0",
+    "dajts": "github:LuisEduardoFrias/DaJTs",
+    "next": "13.5.5",
     "react": "^18",
     "react-dom": "^18",
-    "next": "13.5.5"
+    "terminal-in-react": "github:nitin42/terminal-in-react"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
+    "@types/node": "^20.10.0",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "typescript": "^5.2.2"
   }
 }

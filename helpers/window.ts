@@ -2,14 +2,12 @@ import Point from './point'
 import Size from './size'
 
 export enum WindowState {
- clase,
  minimized,
  normal,
- middle,
- maximun,
+ maximum,
 }
 
-export default class window {
+export default class Window {
  title: string;
  url: string;
  state: State;
@@ -18,13 +16,13 @@ export default class window {
  files: File[];
  folders: Forder[];
  
- constructor(desktop: Desktop, title: string, url: string, files: Files, forders: Forders) {
+ constructor(title: string, url: string, files?: Files, forders?: Forders) {
   this.title = title;
   this.url = url;
   this.state = WindowState.maximum;
-  this.point = new Point(desktop.size.w/2 - 150, desktop.size.h - 100);
+  this.point = new Point(100,100);
   this.size = new Size(300,200);
-  this.files = files;
-  this.polders = forders;
+  this.files = files && [];
+  this.polders = forders && [];
  }
 }

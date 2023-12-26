@@ -1,0 +1,42 @@
+.container {
+ background-color: rgb(36,36,36);
+ box-sizing: border-box;
+ overflow-y: scroll;
+ padding-inline-end: 0px;
+ border-radius: 0 0 3px 3px;
+ 
+ display: grid;
+ grid-template-columns: 1fr;
+ grid-template-rows: auto 1fr;
+ grid-template-areas: "oldline" "newline";
+ grid-gap: 0;
+}
+
+.container textarea {
+ width: 100%;
+ padding: 0;
+ margin: 0;
+ border: none;
+ font-size: 10px;
+ box-sizing: border-box;
+ background-color: transparent;
+ color: var(--color);
+ resize: none;
+ overflow: hidden;
+}
+
+.container textarea:focus {
+ outline: none;
+}
+
+.showtext {
+ grid-area: oldline;
+ /*form-sizer: content;*/
+}
+
+
+.textarea {
+ grid-area: newline;
+ min-height: 40px;
+ height: 100%;
+}

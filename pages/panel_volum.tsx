@@ -3,7 +3,7 @@ import Icon from "./icon"
 import Panel from '@/helpers/panel'
 import styles from "@/styles/panelvolum.module.css"
 import setting from '@/raiz/settings.json'
-import { actions } from './hardware';
+import { actions } from '@/helpers/reducer'
 
 interface IPanel {
  conf: Panel;
@@ -13,9 +13,9 @@ interface IPanel {
 
 export default function PanelVolum(props: IPanel) {
  const {volum} = setting;
- const {panelvolum} = props.state;
+ const {bar} = props.state;
  
- if(volum !== panelvolum) {
+ if(volum !== bar.volum) {
   //props.dispatch({type: actions.volum, value: volum});
  }
  
@@ -24,6 +24,8 @@ export default function PanelVolum(props: IPanel) {
   height:`${props.conf.size.h}px`,
   right: `${props.conf.point.x}px`,
   top: `${props.conf.point.y}px`,
+  display: bar.showPanelVolum ? "block" : "none",
+  opacity: bar.showPanelVolum ? "1" : "0",
  };
  
  function handleChange(event: any) {
@@ -38,6 +40,6 @@ export default function PanelVolum(props: IPanel) {
     <Icon>volume_up</Icon>
     <Icon>brand_awareness</Icon>
    </div>
-   <input type="range" value={panelvolum} name="volum" onChange={handleChange}/>
+   <input type="range" value={bar.volum} name="volum" onChange={handleChange}/>
  </div>)
 }

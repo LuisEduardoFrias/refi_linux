@@ -1,69 +1,71 @@
 'use client'
+import setting from '@/raiz/settings.json'
 import Desktop from './desktop'
 import Mouser from './mouser'
 import Window from './window'
 import Bar from './bar'
 import Icon from './icon'
+import Lock from './lock'
+import Menu from './menu'
 import FileFolder from './file_folder'
 import PanelVolum from './panel_volum'
+import TerminalConsole from '../raiz/apps/terminal/terminal.tsx'
+import PanelChecklock from './panel_check_lock'
 //
 import Dt from '@/helpers/desktop'
+import Reducer from '@/helpers/reducer'
 import Ms from '@/helpers/mouser'
 import Wd from '@/helpers/window'
 import File from '@/helpers/file'
 import Folder from '@/helpers/folder'
 import Point from '@/helpers/point'
+import Lk from '@/helpers/lock'
 import Size from '@/helpers/size'
 import Dk from '@/helpers/desk'
 import Panel from '@/helpers/panel'
-import Br from '@/helpers/bar'
+import Mn from '@/helpers/menu'
+import {SetData, GetData} from '@/helpers/set_data'
+import Br, { Position } from '@/helpers/bar'
 //
 import { useEffect, useState, useReducer } from 'react';
 import styles from '@/styles/hardware.module.css'
 
-const initState = {
- bar: new Br(30, "screen1"),
- panelvolum: 1,
+function initState() {
+ const panelPoint:Point = new Point(-30, 0);
+ const panelSize:Size = new Size(200,50);
+ const menuPoint:Point = new Point(0, 0);
+ const menuSize:Size = new Size(0,0);
+ const mousePoint:Point = new Point(210,160);
+ 
+ return {
+  bar: new Br(30, "screen1", 90, Position.top),
+  initDt: new Dt(500, 250),
+  confLock: new Lk(),
+  confPanel: new Panel(panelPoint, panelSize),
+  confMenu: new Mn(menuPoint, menuSize, setting.apps),
+  mouser: new Ms(mousePoint),
+  showChecklock: false,
+  screen1: new Dk([new File(new Point(10,10), null,"app","txt")], "screen1"),
+  screen2: new Dk([], "screen2"),
+  screen3: new Dk([], "screen3"),
+  screen4: new Dk([], "screen4"),
+ };
 };
 
-export enum actions {
- changeDesktop, 
- showVolum,
- volum,
- 
-}
-
-function _reducer(state, action) {
-  if (action.type === actions.showVolum) {
-    state.bar.showVolum(action.value);
-    return {...state};
-  }
-  if (action.type === actions.changeDesktop) {
-    const _br = state.bar;
-    _br.changeDesktop(action.value);
-    return { ...state, bar: _br};
-  }
-  if (action.type === actions.volum) {
-    return { ...state, panelvolum: action.value};
-  }
-  throw Error('Unknown action.');
-}
-
 export default function Hardware() {
+
+  const [state, dispatch] = useReducer(Reducer, initState());
+  const {bar, initDt, confPanel, showChecklock, confLock, confMenu, mouser, screen1, screen2, screen3, screen4} = state;
   
-  const initDt = new Dt(500, 250);
   const [desktop, setDesktop] = useState<Dt>(initDt);
-  
-  const [state, dispatch] = useReducer(_reducer, initState);
-  const {bar} = state;
   
   const handleResize = () => {
    setDesktop(prev => {
     const newSt = {...prev};
     newSt.size.w = window.innerWidth;
+    //newSt.size.h = window.innerHeight;
     return newSt;
    });
-    //window.innerHeight
   };
   
   useEffect(() => {
@@ -76,65 +78,51 @@ export default function Hardware() {
    }
   }, []);
   
-  useEffect(() => {
-   //alert(JSON.stringify(desktop))
-  }, [desktop, state]);
+  useEffect(() => {}, [desktop, state]);
   
-  const optionPanel: Panel = new Panel(new Point(-30, 25), new Size(200,50));
-  const mouser: Ms = new Ms(new Point(210,160));
-  
-  const desk1: Dk = new Dk([
-   new File(new Point(10, 10), null, "super mario", "exe"),
-   new Folder(new Point(10, 45), "Downloads"),
-   new File(new Point(10, 80), null,"jesus adrian romero", "mp3"),
-   new File(new Point(10, 120), null,"principe de percia - las arenas del tiempo", "mp4"),
-  ], "screen1");
-  const desk2: Dk = new Dk([
-   new File(new Point(10, 10), null, "super mario", "exe"),
-  ], "screen2");
-  const desk3: Dk = new Dk([], "screen3");
-  const desk4: Dk = new Dk([], "screen4");
-  
-  const _desks: Dk[4] = [desk1,desk2,desk3,desk4];
+  const _desks: Dk[4] = [screen1,screen2,screen3,screen4];
 
-  const _window: Wd = new Wd(desktop, "Documents", "./document/", [new File(6,7)], [new Folder(4,7)]);
-  
-  
   return (
    <div className={styles.hardware} >
     <Desktop desktop={desktop} >
-     <Bar dispatch={dispatch} state={state}>
-      <Icon>description</Icon>
-      <Icon>folder</Icon>
-      <Icon>travel_explore</Icon>
-      <Icon>joystick</Icon>
-      <Icon>terminal</Icon>
-     </Bar>
+     {confLock.lock ?
+     (<Lock state={state} dispatch={dispatch} conf={confLock}/>) :
+     (<>
+     <Bar dispatch={dispatch} state={state} />
      <div className={styles.container_desk} >
       {
        _desks.map( (desk_: Dk, index: number) => {
         if(desk_.desktop === bar.desktop)
          return (
-          <div key={index} style={{width:'100%', height: '100%', position: 'relative'}}> 
+          <div key={index} className={styles.desk}> 
            {
-            desk_.fileFolders.map((obj: File | Folder, inde: number) => 
-              <FileFolder key={inde} obj={obj} />
+            desk_.fileFolders.map((obj: File | Folder, inde: number) => <FileFolder key={inde} obj={obj} />
             )
+           }
+           {
+            desk_.openWindows?.map((w,i) => <Window 
+            key={i} 
+            window={w}
+            deskW={desktop.size.w - 16.5} 
+            deskH={desktop.size.h - bar.h + 2} 
+            dispatch={dispatch} />)
            }
           </div>
          )
        })
       }
-      <Window window={_window}>
       {
-       _desks.map( (desk_: Dk, index: number) =>
-        desk_.fileFolders.
-        map((obj: File | Folder, inde: number) => <FileFolder key={inde} obj={obj} />)
-       )
+       <Menu state={state} dispatch={dispatch} conf={confMenu} /> 
       }
-      </Window>
+      {
+       <PanelVolum state={state} dispatch={dispatch} conf={confPanel}/>
+      }
      </div>
-     {bar.panelVolum && <PanelVolum state={state} dispatch={dispatch} conf={optionPanel}/>}
+     </>)
+     }
+     {showChecklock &&
+      <PanelChecklock state={state} dispatch={dispatch}/>
+     }
      <Mouser mouser={mouser}/>
     </Desktop>
    </div>

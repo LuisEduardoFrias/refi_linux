@@ -1,0 +1,25 @@
+:root {
+ --theme1ro: rgba(89,89,255,1);
+ --theme2do: rgba(33,167,255,1);
+ --theme3ro: rgb(23,18,163);
+ --color: #beddffe9;
+ --border: #2c2c2c;
+/* input theme */ 
+--input-border: var(--color);
+--input-background: var(--theme2do);
+--input-shadow: var(--theme1ro);
+--input-color: var(--color);
+--input-span: var(--hax-1ro);
+/* loading */
+--loading-shadowI: var(--theme1ro);
+--loading-shadowE:var(--color);
+--loading-border: var(--theme2do);
+
+}
+/*
+* {
+ padding: 0;
+ margin: 0;
+ box-sizing: border-box;
+}
+*/
