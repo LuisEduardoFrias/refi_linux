@@ -14,7 +14,10 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "etx/*": ["./root/.etc/"],
+      "bin/*": ["./root/.bin/"],
+      "~/*": ["./root/.home/"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

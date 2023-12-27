@@ -14,6 +14,7 @@ export default function FileFolder(props: IFileFProps) {
   const fileStyle = {
    left: `${obj.point.x}px`,
    top: `${obj.point.y}px`,
+   position: obj.inWindow ? "static" : " absolute"
   }
  
   return (

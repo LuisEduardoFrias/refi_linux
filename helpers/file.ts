@@ -5,10 +5,12 @@ export default class File {
  title: string;
  icon: string | null;
  extention: string;
+ inWindow: boolean;
  
- constructor(point: Point, icon: string | null, title: string, extention: string) {
+ constructor(point: Point, icon: string | null, title: string, extention: string, inWindow?: boolean) {
   this.point = point;
   this.title = title;
+  this.inWindow = inWindow;
   this.icon = icon;
   this.extention = extention;
  }

@@ -3,6 +3,7 @@ import React from 'react';
 import dynamic from 'next/dynamic'
 import LdDualRing from './ld_dual_ring'
 import Wd, { WindowState } from '@/helpers/window'
+import Wa from '@/helpers/window_app'
 import File from '@/helpers/file'
 import Folder from '@/helpers/folder'
 import Icon from './icon'
@@ -11,7 +12,7 @@ import { actions } from '@/helpers/reducer'
 import styles from '@/styles/window.module.css'
 
 interface IWindowpProps {
-  window: Wd;
+  window: Wd | Wa;
   deskW: number;
   deskH: number;
   dispatch: any;
@@ -24,12 +25,13 @@ export default function Window({window : wd, dispatch, deskH, deskW}:IWindowpPro
  wd.point.x = wd.state === WindowState.normal ?  wd.point.x : 0;
  wd.point.y = wd.state === WindowState.normal ?  wd.point.y : 0;
  
- 
- const DynamicComponet = dynamic(() =>
- import(`../raiz/apps/${wd.url}`), {
-  ssr: false,
-  loading: () => <LdDualRing show={true} />,
- });
+ if(wd instanceof Wa) {
+   const DynamicComponet = dynamic(() =>
+   import(`../raiz/apps/${wd.url}`), {
+    ssr: false,
+    loading: () => <LdDualRing show={true} />,
+   });
+ }
  
  function handleNormal()
  {
@@ -41,7 +43,7 @@ export default function Window({window : wd, dispatch, deskH, deskW}:IWindowpPro
     state: 1}
     });
    }
-   else if(dw.state == WindowState.normal)
+   else if(wd.state == WindowState.normal)
    {
     dispatch({type: actions.normalApp, window: {...wd, 
     size: {w:deskW, h:deskH}, 
@@ -80,9 +82,11 @@ export default function Window({window : wd, dispatch, deskH, deskW}:IWindowpPro
     </div>
    </div>
    <div className={styles.container}>
-    <DynamicComponet 
+   { (wd instanceof Wa) ?
+    (<DynamicComponet 
      width={wd.size.w} 
-     height={wd.size.h - 19.4} />
+     height={wd.size.h - 18} />) : null
+   }
    {
     fileFolders?.map((obj: File | Folder, inde: number) => <FileFolder key={inde} obj={obj} />)
    }

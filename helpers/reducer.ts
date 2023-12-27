@@ -1,5 +1,7 @@
 import {SetData, GetData} from '@/helpers/set_data'
+import { Guid } from 'guid-typescript'
 import Wa from '@/helpers/window_app'
+import Wd from '@/helpers/window'
 
 export enum actions {
  changeDesktop = "changeDesktop", 
@@ -11,6 +13,7 @@ export enum actions {
  openApp = "openApp",
  closeApp = "closeApp",
  normalApp = "normalApp",
+ openFolder = "openFolder",
 }
 
 export default function Reducer(state, action) {
@@ -32,8 +35,24 @@ export default function Reducer(state, action) {
    openApp: () => 
    {
     const desk = state[state.bar.desktop];
-    desk.addWindow(new Wa(action.app.name, action.app.file))
-    state.bar.showMenu(false);
+    desk.addWindow(new Wa(Guid.create().toString(), action.app.name, action.app.file))
+    if(state.bar.showPanelMenu)
+     state.bar.showMenu(false);
+    return {...state};
+   },
+   openFolder: () => 
+   {
+    const desk = state[state.bar.desktop];
+    
+    desk.addWindow(
+     new Wd(Guid.create().toString(), "Folder", null),
+     state.initDt.size.w, 
+     state.initDt.size.y - state.bar.h);
+    
+    if(state.bar.showPanelVolum)
+     state.bar.showVolum(false);
+    if(state.bar.showPanelMenu)
+     state.bar.showMenu(false);
     return {...state};
    },
    closeApp: () => 
@@ -46,12 +65,13 @@ export default function Reducer(state, action) {
    {
     const desk = state[state.bar.desktop];
     desk.updateWindow(action.window);
-    alert("hh")
     return {...state};
    },
    changeClose: () =>
    {
     state.showChecklock = action.value;
+    if(state.bar.showPanelVolum)
+     state.bar.showVolum(!action.value);
     return {...state};
    },
    changeDesktop: () => 
@@ -83,7 +103,7 @@ export default function Reducer(state, action) {
     _br.changeVolum(action.value)
     
     const st = { ...state, bar: _br };
-    SetData({settings: st});
+    SetData("setting",{settings: st});
     return st;
    },
    default: () => {throw Error('Unknown action.')},

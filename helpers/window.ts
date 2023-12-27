@@ -8,6 +8,7 @@ export enum WindowState {
 }
 
 export default class Window {
+ key: string;
  title: string;
  url: string;
  state: State;
@@ -16,13 +17,14 @@ export default class Window {
  files: File[];
  folders: Forder[];
  
- constructor(title: string, url: string, files?: Files, forders?: Forders) {
+ constructor(key: string, title: string, url: string | null, files?: Files, folders?: Forders) {
+  this.key = key;
   this.title = title;
-  this.url = url;
+  this.url = url && "";
   this.state = WindowState.maximum;
   this.point = new Point(100,100);
   this.size = new Size(300,200);
-  this.files = files && [];
-  this.polders = forders && [];
+  this.files = files ?? [];
+  this.folders = folders ?? [];
  }
 }

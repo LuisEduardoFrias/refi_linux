@@ -1,0 +1,24 @@
+El conjunto de carpetas que dan vida a un sistema
+como Linux se conoce como el "Filesystem Hierarchy 
+Standard" (FHS), que es un estándar que define la 
+estructura de directorios y archivos en sistemas 
+operativos tipo Unix, incluyendo Linux. 
+
+Algunas de las carpetas clave incluidas en el FHS son:
+
+/bin: Contiene archivos ejecutables esenciales.
+--/boot: Archivos necesarios para el arranque del sistema.
+/dev: Dispositivos del sistema.
+/etc: Archivos de configuración del sistema.
+/home: Directorios de usuario.
+--/lib y /lib64: Bibliotecas compartidas.
+--/mnt: Puntos de montaje para sistemas de archivos 
+temporales.
+/opt: Opcionalmente, para paquetes de software 
+adicionales.
+/sbin: Archivos ejecutables para la administración del 
+sistema.
+/tmp: Directorio para archivos temporales.
+/usr: Archivos y directorios relacionados con 
+aplicaciones y recursos compartidos.
+/var: Datos variables, como logs y archivos temporales.

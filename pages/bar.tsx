@@ -39,6 +39,10 @@ export default function Bar(props:IBarProps) {
   iconVolum = "volume_off";
  }
  
+ function click() : void {
+   props.dispatch({type: actions.openFolder})
+ }
+ 
  return (
   <div className={styles.bar} style={_style}>
    <div div className={styles.home} onClick={()=>props.dispatch({type: actions.showMenu, value: !bar.showPanelMenu})}>
@@ -50,7 +54,7 @@ export default function Bar(props:IBarProps) {
     
     <div className={styles.container_app}>
       <Icon>description</Icon>
-      <Icon>folder</Icon>
+      <Icon onclick={click} >folder</Icon>
       <Icon>travel_explore</Icon>
       <Icon>joystick</Icon>
       <Icon>terminal</Icon>
